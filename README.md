@@ -8,4 +8,4 @@ All the details are stored in terraform file as an input and are combined with t
 
 The EBS on OCI Architecture:
 
-![Drag Racing](Dragster.jpg)
+![EBS_Architecture](src/frontEnd/img/EBS_Architecture.jpg)
