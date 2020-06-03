@@ -6,3 +6,6 @@ Let's take a look at the use case for this demo. The application is built to sup
 
 All the details are stored in terraform file as an input and are combined with the configuration files (in the src/backEnd/repo). The terraform configuration files are packaged and sent to Oracle Resource Manager which then executes the stack and provisions resources in the tenancy.
 
+The EBS on OCI Architecture:
+
+![Drag Racing](Dragster.jpg)
