@@ -1,4 +1,4 @@
-# ebs_on_oci
+# Deploying E-Business Suite on Oracle Cloud Infrastructure
 
 A web-based application which enables the end user to provision a network architecture on Oracle Cloud Infrastructure with a few clicks. The provisioned network and compute resources can be used by teams to deploy and run E-Business Suite on OCI.
 
