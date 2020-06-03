@@ -3,6 +3,8 @@ node_modules
 
 # exclude everything
 src/backEnd/userFiles/*
+src/backEnd/repo/Multi-AD-Architecture/keys/*
 
 # exception to the rule
-!src/backEnd/userFiles/.gitkeep 
+!src/backEnd/userFiles/.gitkeep
+!src/backEnd/repo/Multi-AD-Architecture/keys/.gitkeep 
