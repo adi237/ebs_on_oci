@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="libs/cidr.js" > </script>
+    <script src="js/StaticList.js" > </script>
+    <script src="js/UserGithub.js" > </script>
+    <script src="js/Modals.js" > </script>
+    <script src="js/UIBuilder.js" > </script>
+    <script src="js/CIDRchecks.js" > </script>
+    <script src="js/Application.js" > </script>
+
+    <!-- materialize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" media="screen,projection">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- File Pond (File Upload Plugin)-->
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- m-stepper CSS and JS -->
+    <script src="https://unpkg.com/materialize-stepper@3.1.0/dist/js/mstepper.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/materialize-stepper@3.1.0/dist/css/mstepper.min.css"> </link>
+
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- Ion Icons -->
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+
+    <!--Google Fonts-->
+
+    <link rel="stylesheet" type="text/css" href="css/Application.css">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+  </head>
+
+  <!-- Body -->
+
+  <body>
+
+    <!-- Modal Structure -->
+
+        <!-- Landing Page Modal Structure -->
+        <div id="landingPage" class="modal bottom-sheet landingModal">
+          <div class="modal-content"style="padding-bottom: 0px; height:100%; background-image: url('img/landing_background.png');background-position: center; background-repeat: no-repeat;background-size: cover;">
+            <div class="row" style="margin-top:5%;">
+              <div class="input-field col s6" >
+                  <img width="600" src="img/AI.jpg" style="float:right;">
+              </div>
+              <div class="input-field col s6">
+                  <div style="margin-top:15%;margin-left:10%;margin-right:10%;font-family: comic;">
+                    <h3> Deploy Oracle E-Business Suite on Oracle Cloud Infrastructure </h3>
+                    <p> Oracle provides automation to provision, migrate and manage the lifecycle of Oracle E-Business Suite environments in Oracle Cloud Infrastructure.
+                      This can eliminate much of the complexity of manual deployment and management. You can plan a multi-host,
+                      secure and highly available topology.</p>
+                    <p> <a onclick="showConfirmationModal('diagram',null,null);" style="cursor:pointer;"><u> See Architecture Diagram </u></a> </p>
+                    <br/>
+                    <a class="waves-effect waves-light btn" style="background-color:mintcream;color:black;" onclick="getStarted();">Get Started</a>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- Loading Modal Structure -->
+        <div id="loader" class="modal loaderModal">
+          <div class="modal-content" style="padding-bottom: 0px;">
+            <div class="row">
+                <div class="input-field col s3">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-red-only">
+                          <div class="circle-clipper left">
+                            <div class="circle"></div>
+                          </div><div class="gap-patch">
+                            <div class="circle"></div>
+                          </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                          </div>
+                        </div>
+                    </div>
+                 </div>
+
+                  <div class="col s9">
+                    <h5>Loading...</h5>
+                  </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Login Modal Structure -->
+          <div id="loginModel" class="modal">
+            <div class="modal-content" style="padding-bottom:0px;">
+              <h5>User Credentials</h5>
+              <p>In order to start with this wizard, please provide the following details: <a target="_blank" href="https://docs.cloud.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm#five" style="float:right;font-size:11px;"><u>Where do I get this?</u></a></p>
+
+              <div class="row">
+                  <div class="input-field col s12">
+                   <input id="UC_tenancyOCID" type="text" class="validate tenancyId" placeholder=""> </input>
+                   <label for="UC_tenancyOCID" class="activeLabel"> Tenancy OCID <span style="color:red;">*</span> </label>
+                  </div>
+               </div>
+               <div class="row">
+                 <div class="input-field col s6">
+                  <input id="UC_userOCID" type="text" class="validate userId" placeholder=" "> </input>
+                  <label for="UC_userOCID" class="activeLabel"> User OCID <span style="color:red;">*</span> </label>
+                 </div>
+                 <div class="input-field col s6">
+                  <input id="UC_compartmentId" type="text" class="validate compartmentId" placeholder=" "> </input>
+                  <label for="UC_compartmentId" class="activeLabel"> Compartment OCID <span style="color:red;">*</span> </label>
+                 </div>
+                </div>
+                <div class="row">
+                   <div class="input-field col s6">
+                    <input id="UC_fingerprint" type="text" class="validate fingerprint" placeholder=" "> </input>
+                    <label for="UC_fingerprint" class="activeLabel"> Fingerprint <span style="color:red;">*</span> </label>
+                   </div>
+                   <div class="input-field col s6" style="margin:0px;">
+                    <input id="UC_privateKeyFile" type="file" class="validate privateKeyFile"> </input>
+                   </div>
+                 </div>
+
+            </div>
+            <div class="modal-footer">
+              <div class="row" style="margin:0px;">
+                <div class="col s6">
+                  <label></label>
+                  <div id="UC_errorLabel" style="color:red; display:none; text-align: left;">
+                    <i class="material-icons">error_outline</i>
+                    <label style="color:red;font-size:15px;vertical-align:super;"> Please provide all inputs.</label>
+                  </div>
+                </div>
+                <div class="col s6">
+                  <a class="waves-effect waves-green btn-flat" style="color: white; border: 2px solid white;border-radius: 25px;" onclick="initUserAuth();">SUBMIT</a>
+                </div>
+              </div>
+            </div>
+            <div id="UC_progress" class="progress" style="display:none;margin-bottom:0px;">
+              <div class="indeterminate"></div>
+            </div>
+          </div>
+
+
+      <!-- Compute Options Modal Structure -->
+        <div id="computeOptionsModal" class="modal">
+          <div class="modal-content" style="padding-bottom: 0px;">
+            <div class="row">
+                <div class="row center">
+                    <h5> Please select any one of the following options: </h5>
+                </div>
+                <div class="row">
+                    <div class="col s6 m6">
+                      <div class="card blue-grey darken-1" style="cursor: pointer;" onclick="onSelectAD(true);" id="AD_singleADCard">
+                        <a class="btn-floating halfway-fab waves-effect waves-light" style="background:none;display:none;box-shadow:none;"><i class="material-icons">check_circle</i></a>
+                        <div class="card-content white-text">
+                          <span class="card-title center">Single AD</span>
+                          <p>By selecting this option, you are choosing to go with a single AD option.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col s6 m6">
+                      <div class="card blue-grey darken-1" style="cursor: pointer;" onclick="onSelectAD(false);" id="AD_multiADCard">
+                        <a class="btn-floating halfway-fab waves-effect waves-light" style="background:none;display:none;box-shadow:none;"><i class="material-icons">check_circle</i></a>
+                        <div class="card-content white-text">
+                          <span class="card-title center">Multi AD</span>
+                          <p>By selecting this option, you are choosing to go with a multi AD option.</p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div id="AD_radioOptions" class="row center" style="display:none;">
+
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a id="AD_doneButton" class="waves-effect waves-green btn-flat" style="display:none;color: white; border: 2px solid white;border-radius: 25px;" onclick="onCloseComputeOptionsModal();">DONE</a>
+          </div>
+        </div>
+
+      <!-- Compute Sure Modal Structure -->
+        <div id="computeSureModal" class="modal">
+          <div class="modal-content" style="padding-bottom: 0px;">
+          </div>
+          <div class="modal-footer">
+            <div class="row" style="margin:0px;">
+              <div class="col s12">
+                <label></label>
+                <div id="CSM_errorLabel" class="errorLabel" style="color:red; display:none; text-align: left;">
+                  <i class="material-icons">error_outline</i>
+                  <label style="color:red;font-size:15px;vertical-align:super;">Error</label>
+                </div>
+              </div>
+              <div class="col s12">
+                <a id="CSM_backButton" class="waves-effect waves-green btn-flat" style="color: white; border: 2px solid white;border-radius: 25px;">CANCEL</a>
+                <a id="CSM_doneButton" class="waves-effect waves-green btn-flat" style="color: white; border: 2px solid white;border-radius: 25px;">OKAY</a>
+              </div>
+            </div>
+          </div>
+          <div id="CSM_progress" class="progress" style="display:none;margin-bottom:0px;">
+            <div class="indeterminate"></div>
+          </div>
+        </div>
+
+        <!-- Job List Modal Structure -->
+          <div id="jobListModal" class="modal">
+            <div class="modal-content" style="padding-bottom: 0px;overflow:hidden;height: 450px;">
+              <div class="row" style="width:200%">
+
+                <div id="table" class="col s6" style="transition: width 1s;">
+
+                </div>
+
+                <div id="logs" class="col s6" style="width=50%;height:100%;margin-left:2%;overflow:scroll;">
+                  <div class="options">
+                    <a class="waves-effect waves-light btn-flat" onclick="backToJobList()" style="color: white;border: 1px solid white;border-radius: 25px;"> <i class="material-icons left">arrow_back</i> Back </a>
+                    <a id="fileDownload" class="waves-effect waves-light btn-flat" style="color: white; float: right; right:35px;border: 1px solid white;border-radius: 25px;" download> <i class="material-icons left">file_download</i> Download </a>
+                    <div class="progress" style="margin: 2px;width: 94%;">
+                        <div class="indeterminate"></div>
+                    </div>
+                  </div>
+
+                     <div class="logBody" style="border: 1px solid white;width: 95%;overflow-y: scroll;height: 380px;">
+
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <a id="JL_doneButton" class="waves-effect waves-green btn-flat" style="color: white; border: 2px solid white;border-radius: 25px;" onclick="refreshJobListModal();"><i class="material-icons left">refresh</i>REFRESH</a>
+              <a id="JL_doneButton" class="waves-effect waves-green btn-flat" style="color: white; border: 2px solid white;border-radius: 25px;" onclick="document.getElementById('jobListModal').M_Modal.close();"><i class="material-icons left">done</i>DONE</a>
+            </div>
+          </div>
+
+    <!-- stepper -->
+      <ul class="stepper horizontal linear" style="min-height:458px">
+
+         <li class="step active" id="Authentication">
+          <div class="step-title waves-effect" >Authentication</div>
+            <div class="step-content">
+               <!-- Your step content goes here (like inputs or so) -->
+               <div class="heading"> Authentication </div>
+
+               <div class="step-inputForm">  </div>
+
+              <div class="step-actions">
+                  <!-- Here goes your actions buttons -->
+                  <button class="waves-effect waves-dark btn next-step next-button blue" data-feedback="nextStepFeedback">NEXT</button>
+               </div>
+            </div>
+         </li>
+
+         <li class="step" id="VCN">
+          <div class="step-title waves-effect">VCN</div>
+            <div class="step-content">
+               <!-- Your step content goes here (like inputs or so) --> <div class="heading"> VCN </div>
+              <div class="step-inputForm"> </div>
+              <div class="step-actions">
+                  <!-- Here goes your actions buttons -->
+                  <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+
+                  <button class="waves-effect waves-dark btn next-step next-button blue">NEXT</button>
+               </div>
+            </div>
+         </li>
+
+         <li class="step" id="Gateways">
+          <div class="step-title waves-effect">Gateways</div>
+            <div class="step-content">
+               <!-- Your step content goes here (like inputs or so) --> <div class="heading">Gateways</div>
+              <div class="step-inputForm"> </div>
+              <div class="step-actions">
+                  <!-- Here goes your actions buttons -->
+                  <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+
+                  <button class="waves-effect waves-dark btn next-step next-button blue">NEXT</button>
+               </div>
+            </div>
+         </li>
+
+         <li class="step" id="SecurityList">
+          <div class="step-title waves-effect">Security Lists</div>
+            <div class="step-content">
+               <!-- Your step content goes here (like inputs or so) --> <div class="heading"> Security Lists </div>
+              <div class="step-inputForm"> </div>
+              <div class="step-actions">
+                  <!-- Here goes your actions buttons -->
+                  <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+
+                  <button class="waves-effect waves-dark btn next-step next-button blue">NEXT</button>
+               </div>
+            </div>
+         </li>
+
+         <li class="step" id="RouteTable">
+          <div class="step-title waves-effect">Route Tables</div>
+            <div class="step-content">
+               <!-- Your step content goes here (like inputs or so) --> <div class="heading"> Route Tables </div>
+              <div class="step-inputForm"> </div>
+              <div class="step-actions">
+                  <!-- Here goes your actions buttons -->
+                  <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+
+                  <button class="waves-effect waves-dark btn next-step next-button blue">NEXT</button>
+               </div>
+            </div>
+         </li>
+
+         <li class="step" id="Subnets">
+          <div class="step-title waves-effect">Subnets</div>
+            <div class="step-content">
+               <!-- Your step content goes here (like inputs or so) --> <div class="heading"> Subnets </div>
+              <div class="step-inputForm"> </div>
+              <div class="step-actions">
+                  <!-- Here goes your actions buttons -->
+                  <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+
+                  <button class="waves-effect waves-dark btn next-step next-button blue modal-trigger" data-target="computeOptionsModal">NEXT</button>
+               </div>
+            </div>
+         </li>
+
+         <li class="step" id="Compute">
+          <div class="step-title waves-effect">Compute</div>
+            <div class="step-content">
+               <!-- Your step content goes here (like inputs or so) --> <div class="heading"> Compute </div>
+              <div class="AD" id="ComputeADCard">
+                <div class="row">
+                    <div class="col s12 m3">
+                      <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                          <span class="card-title">Single AD</span>
+                          <p class="card-message">AD-<span class="ADNum">1</span></p>
+                        </div>
+                        <div class="card-action">
+                          <a onclick="document.getElementById('computeOptionsModal').M_Modal.open();" style="color:darkorange">Edit</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+               </div>
+              <div class="step-inputForm"> </div>
+              <div class="step-actions">
+                  <!-- Here goes your actions buttons -->
+                  <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+
+                  <button class="waves-effect waves-dark next-step btn next-button" data-feedback="nextStepFeedback">NEXT</button>
+               </div>
+            </div>
+         </li>
+
+         <li class="step" id="LoadBalancer">
+          <div class="step-title waves-effect">Load Balancer</div>
+            <div class="step-content">
+               <!-- Your step content goes here (like inputs or so) --> <div class="heading"> Load Balancer </div>
+              <div class="step-inputForm"> </div>
+              <div class="step-actions">
+                  <!-- Here goes your actions buttons -->
+                  <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+
+                  <button class="waves-effect waves-dark btn next-step next-button blue">NEXT</button>
+               </div>
+            </div>
+         </li>
+
+         <li class="step" id="Review">
+          <div class="step-title waves-effect">Review</div>
+            <div class="step-content">
+               <!-- Your step content goes here (like inputs or so) --> <div class="heading"> Review </div>
+              <div class="step-inputForm"> </div>
+              <div class="step-actions">
+                  <!-- Here goes your actions buttons -->
+                  <button class="waves-effect waves-dark btn-flat previous-step">BACK</button>
+
+                  <input type="button" value="SUBMIT" class="btn blue" onclick="onSubmit();"></input>
+               </div>
+            </div>
+         </li>
+      </ul>
+
+    <!-- File Pond (File Upload Plugin)-->
+      <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
+    <!-- FAB -->
+    <div id="loginFAB" class="fixed-action-btn" style="left:20px;padding:0px;bottom:20px;width:10%;">
+        <a class="btn-floating btn-large" style="background:#61AFEF;">
+            <i class="material-icons large" style="color:black;">menu</i>
+        </a>
+        <ul>
+          <li>
+            <a class="btn-floating red darken-2" onclick="initJobListModal();">
+              <i class="material-icons tooltipped" data-position="top" data-tooltip="Job List" style="color:black;">insert_chart</i>
+            </a>
+          </li>
+          <li>
+            <a class="btn-floating green darken-1" onclick="document.getElementById('loginModel').M_Modal.open();document.getElementById('loginModel').M_Modal.options.dismissible=true;">
+              <i class="material-icons tooltipped" data-position="top" data-tooltip="Credentials" style="color:black;">account_circle</i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    <!--  <div id="gitHubFAB" class="fixed-action-btn" style="left:20px;padding:0px;bottom:20px;width:10%;">
+        <a class="btn-floating btn-large" onclick="document.getElementById('githubModel').M_Modal.open();document.getElementById('githubModel').M_Modal.options.dismissible = true;" style="background:#61AFEF;">
+          <ion-icon name="logo-github" style="font-size: 35px;color:black; margin-top: 10px;"></ion-icon>
+        </a>
+      </div>
+
+     Tap Target Structure For FAB
+      <div class="tap-target" data-target="gitHubFAB">
+        <div class="tap-target-content">
+          <h5>Github Credentials</h5>
+          <p>Anytime you want to change your github credentials, click here!</p>
+        </div>
+      </div>-->
+
+  </body>
+</html>

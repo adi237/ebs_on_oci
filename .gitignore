@@ -1,0 +1,8 @@
+
+node_modules
+
+# exclude everything
+src/backEnd/userFiles/*
+
+# exception to the rule
+!src/backEnd/userFiles/.gitkeep 

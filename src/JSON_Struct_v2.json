@@ -1,0 +1,107 @@
+{
+  "Authentication": {
+    "compartment_ocid" : "" ,
+    "region" : "us-ashburn-1" ,
+    "bastion_ssh_public_key" : "" ,
+    "bastion_ssh_private_key" : "" ,
+    "ssh_public_key" : "" ,
+    "ssh_private_key" : ""
+  },
+  "VCN": {
+    "vcn_cidr": "10.0.0.0/16",
+    "vcn_displayname": "ebsvcn",
+    "vcn_dns_label": "ebsvcn"
+  },
+  "Gateways": {
+    "int_gateway_displayname": "igateway",
+    "nat_gateway_displayname": "natgateway",
+    "srv_gateway_displayname": "servicegateway",
+    "drg_displayname": "drg",
+    "drg_att_displayname": "drgatt"
+  },
+  "SecurityList": {
+    "bastionseclist_displayname": "bastionseclist",
+    "dbseclist_displayname": "dbseclist",
+    "appseclist_displayname": "appseclist",
+    "publbseclist_displayname": "publbseclist"
+  },
+  "RouteTable": {
+    "bastion_displayname_rt" : "ebsbastionrt",
+    "database_displayname_rt" : "ebsdbroute",
+    "app_displayname_rt" : "ebsapproute",
+    "fss_displayname_rt" : "fssroute",
+    "drg_displayname_rt": "drgroute"
+  },
+  "Subnets":{
+    "bastion": {
+      "subnet_cidr_block" : "10.0.4.0/24",
+      "subnet_display_name" : "bastionnet"
+    },
+    "app": {
+      "subnet_cidr_block" : "10.0.3.0/24",
+      "subnet_display_name" : "appnet"
+    },
+    "public_lb": {
+      "subnet_cidr_block" : "10.0.5.0/24",
+      "subnet_display_name" : "lbsubnetpub"
+    },
+    "database": {
+      "subnet_cidr_block" : "10.0.1.0/24",
+      "subnet_display_name" : "dbnet"
+    },
+    "filestorage": {
+      "subnet_cidr_block" : "10.0.7.0/24",
+      "subnet_display_name" : "fssnet"
+    },
+    "private_lb": {
+      "subnet_cidr_block" : "10.0.6.0/24",
+      "subnet_display_name" : "lbsubnetprv"
+    },
+    "backup": {
+      "subnet_cidr_block" : "10.0.2.0/24",
+      "subnet_display_name" : "backupsubnet"
+    }
+  },
+  "Compute": {
+    "AD": ["1","2"],
+    "Bastion": {
+      "bastion_compute_display_name": "",
+      "linux_os_version" : "7.7",
+      "timezone" : "America/New_York",
+      "bastion_user" : "opc",
+      "compute_boot_volume_size_in_gb" : "100",
+      "compute_instance_user" : "opc"
+    },
+    "AppTier":{
+      "app_compute_display_name": "",
+      "app_instance_count" : "1",
+      "app_instance_shape" : "VM.Standard2.2",
+      "env_prefix" : "ebsenv",
+      "app_instance_listen_port" : "8000"
+    },
+    "enable_autoscaling_pools": "false",
+    "DatabaseTier": {
+      "database_compute_display_name": "",
+      "db_hostname_prefix" : "dbdemo",
+      "db_edition" : "ENTERPRISE_EDITION_EXTREME_PERFORMANCE",
+      "db_license_model" : "LICENSE_INCLUDED",
+      "db_version" : "18.0.0.0",
+      "db_node_count" : "1",
+      "db_instance_shape" : "VM.Standard2.4",
+      "db_name" : "EBSCDB",
+      "db_size_in_gb" : "256",
+      "db_admin_password" : "QAed12_sd#1AS",
+      "db_characterset" : "AL32UTF8",
+      "db_nls_characterset" : "AL16UTF16",
+      "db_pdb_name" : "DUMMYPDB"
+    }
+  },
+  "LoadBalancer": {
+    "public_load_balancer_display_name": "",
+    "private_load_balancer_display_name": "",
+    "load_balancer_shape" : "100Mbps",
+    "load_balancer_listen_port" : "8000",
+    "public_load_balancer_hostname" : "pub.ebs.example.com",
+    "private_load_balancer_hostname": "pri.ebs.example.com"
+  }
+}

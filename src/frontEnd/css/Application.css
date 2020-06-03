@@ -1,0 +1,287 @@
+.heading {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.subHeadings {
+  font-size: 20px;
+  color: #2096f3;
+}
+
+html , body, ul, form {
+  height: 100%;
+  width: 100%;
+  color: white;
+  font-family: Nunito,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+}
+
+#toast-container {
+    top: 12%;
+    right: 3%;
+}
+
+.material-tooltip{
+  background-color: #3d424b;
+}
+
+.landingModal{
+  max-height: 100% !important;
+  height: 100%;
+}
+
+/* Job List Collapsible*/
+
+.jobListCollapsible {
+  height: 380px;
+  overflow: scroll;
+}
+
+.jobListCollapsible .collapsible-header{
+background-color: #66666642;
+color: darkorange;
+}
+
+.jobListCollapsible .collapsible-body{
+background-color: #66666642;
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #61afef;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #61afef;
+}
+
+/*.jobListCollapsible .jobFullSuccess{
+  box-shadow: #abeea6 0px 0px 16px 1px inset;
+}
+
+.jobListCollapsible .jobHalfSuccess{
+  box-shadow: #f9e549 0px 0px 16px 1px inset;
+}
+
+.jobListCollapsible .jobInProgress{
+  box-shadow: white 0px 0px 16px 1px inset;
+}
+
+.jobListCollapsible .jobFailure{
+  box-shadow: #ff0000 0px 0px 16px 1px inset;
+}*/
+
+.settings-IconColor {
+  color: #1a97e0;
+  animation: rotation 2s infinite linear;
+}
+.flash_on-IconColor {
+  color: #DD0031;
+}
+.wb_cloudy-IconColor {
+  color: #b1b0b0;
+}
+.wb_sunny-IconColor {
+  color: #01c301;
+}
+
+@-webkit-keyframes rotation {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
+
+/* Modals */
+
+  .modal , .modal-content , .modal-footer {
+    background-color: #1e2835 !important;
+  }
+
+  .loaderModal {
+    top: 45% !important;
+    border-radius: 20px;
+    width: 15% !important;
+  }
+
+  /* Job List Modal Table */
+
+      th, td{
+        width: 25%;
+      }
+
+      tr {
+        border-bottom: 1px solid #607D8B;
+        line-height: 15px;
+        padding: 0px;
+        height: -webkit-fill-available;
+      }
+
+/* Body Background Image */
+
+  body {
+    background-color: #1e2530;
+  }
+
+  body::after {
+    content: "";
+    /*background-image: url('../img/oracle-cloud.png');
+    background-size: 40% 40%;*/
+    background-image: url('../img/landing_background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position-x: center;
+    background-position-y: center;
+
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+  }
+
+/* Select DropDowns */
+
+  .dropdown-content {
+    background: #181e27;
+    height: 150px;
+    color: white;
+  }
+
+  .select-dropdown.dropdown-content li.selected {
+    background-color: rgba(0, 0, 0, 0.21) !important;
+  }
+
+  /* Review Cards */
+  .reviewCards {
+    background: #444 !important;
+  }
+
+  .reviewKey {
+    color: darkorange;
+  }
+
+  .reviewValue {
+    overflow: hidden;
+    width: 150px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+  }
+
+/* Stepper */
+
+  ul.stepper.horizontal .step.active .step-title::before, ul.stepper.horizontal .step.done .step-title::before {
+    background-color: #61AFEF;
+    color: black;
+  }
+
+  ul.stepper.horizontal .step.wrong .step-title::before {
+      content: '\e001';
+      font-size: 24px;
+      font-family: 'Material Icons';
+      background-color: red;
+  }
+
+  .next-button {
+      background: #61AFEF;
+      border-radius: 9999em;
+      color: #171b23;
+      font-weight: 500;
+      text-decoration: none;
+  }
+
+  .step-inputForm {
+    transition: opacity 1s .25s;
+    letter-spacing: .0625em;
+  }
+
+  .previous-step {
+    color: white;
+  }
+
+  ul.stepper .step:not(:last-of-type)::after {
+      background-color: #9e9e9e;
+  }
+
+/* File Pond */
+
+  .filepond--drop-label.filepond--drop-label label {
+    color: #c7ccd8;
+  }
+
+  .filepond--panel[data-scalable=true] {
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      background-color: transparent !important;
+      border: none !important;
+  }
+
+  .filepond--panel-root {
+      background-color: transparent;
+      border: 2px solid #2c3340;
+  }
+
+/* All Input */
+
+  /*All DropDown arrows*/
+    .caret {
+      fill: white !important;
+    }
+
+  /* Input Radio */
+    input[type="radio"]:checked+span:after, input[type="radio"].with-gap:checked+span:after {
+        background-color: darkorange;
+        border: none;
+    }
+
+  /* All Input placeholders */
+    ::placeholder {
+      color: gray;
+    }
+
+  input:disabled {
+      color: slategray !important;
+      cursor: default;
+      border-bottom: 1px dotted slategray !important;
+  }
+
+  input:disabled+label{
+    color: slategray !important;
+  }
+
+  input {
+    color: white;
+  }
+
+  /* label color */
+     .input-field label, .fileHeadings{
+       color: #FF9800;
+     }
+   /* label focus color */
+     .input-field input[type=text]:focus + label {
+       color: white;
+     }
+   /* label underline focus color */
+     .input-field input[type=text]:focus {
+       border-bottom: 1px solid #000;
+       box-shadow: 0 1px 0 0 #000;
+     }
+   /* valid color */
+     .input-field input[type=text].valid {
+       border-bottom: 1px solid #9e9e9e;
+      box-shadow: 0 1px 0 0 #000;
+     }
+   /* invalid color */
+     .input-field input[type=text].invalid {
+       border-bottom: 1px solid #000;
+       box-shadow: 0 1px 0 0 #000;
+     }
+   /* icon prefix focus color */
+     .input-field .prefix.active {
+       color: white;
+     }
