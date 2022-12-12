@@ -6,7 +6,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cidr-lib": "^1.1.3",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "http-signature": "^1.3.4",
     "jssha": "^3.0.0",
     "shelljs": "^0.8.3"
